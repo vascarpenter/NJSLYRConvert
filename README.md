@@ -7,13 +7,16 @@
   - https://diehardtales.com
     
 - ビルドに必要
-  - `kuromoji-0.7.7.jar`
+  - kotlin  IntelliJ IDEA
+  - `kuromoji-0.7.7.jar` 
   - `sqlite-jdbc-3.34.0.jar`
+  - TablePlusなどのsqliteエディタ
+
 - 実行に必要な環境
   - Java 1.8以降 
   - Sqlite3
     - MacOSXはシステムプレインストールなので何もいらない
-    - Windowsは公式 https://www.sqlite.org/download.html から sqlite-dllをダウンロードして DLL と cfg を `\Windows\System` あるいは `\Windows\System32`に入れる
+    - Windowsは公式 https://www.sqlite.org/download.html から sqlite-dllをダウンロードして DLL と cfg を `\Windows\System` (64bit) あるいは `\Windows\System32` (32bit)に入れる
 
 - 実行方法
   - `java -jar NJSLYRConvert.jar`

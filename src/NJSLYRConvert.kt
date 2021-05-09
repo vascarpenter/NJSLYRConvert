@@ -1,7 +1,8 @@
 // 忍殺語変換をアシストするソフト
-// フーリンカザンがダウンロードできなくなっったため　辞書のみ利用し自作
+// フーリンカザンがダウンロードできなくなった
 
 // 形態素解析： kuromoji © アティリカ株式会社 https://github.com/atilika/kuromoji/
+// sqlite-jdbc https://github.com/xerial/sqlite-jdbc
 // SwingパーツのフォントをDialog 12pt regularにしましたか
 
 
@@ -26,7 +27,7 @@ fun main(args: Array<String>)
     {
         conn = DriverManager.getConnection("jdbc:sqlite::resource:NJSLYRDict.sqlite")
         val statement: Statement? = conn?.createStatement()
-        val resultSet: ResultSet? = statement?.executeQuery("SELECT name,value FROM dialect")
+        val resultSet: ResultSet? = statement?.executeQuery("SELECT name,value FROM dialect order by id")
         while (resultSet?.next() == true)
         {
             val name = resultSet.getString(1)
