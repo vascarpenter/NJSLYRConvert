@@ -18,6 +18,15 @@ data class NinDB(var name: String, var value: String)
 
 val nindb = mutableListOf<NinDB>()
 
+// 実際アスタリスクは正規表現に使われるため置換が必要な
+fun avoidasterisk(arg: String) : String
+{
+    if(arg == "*")
+        return ""
+    else
+        return arg
+}
+
 fun main(args: Array<String>)
 {
     var conn: Connection? = null
@@ -71,21 +80,26 @@ fun main(args: Array<String>)
         tokens.forEach {
             var sur = it.surfaceForm
             var surhi =
-                it.allFeaturesArray[0] + "," + it.allFeaturesArray[1] + "," + it.allFeaturesArray[4] + "," + it.allFeaturesArray[5] + "," + it.allFeaturesArray[6]
+                avoidasterisk(it.allFeaturesArray[0]) + ","+
+                avoidasterisk(it.allFeaturesArray[1]) + ","+
+                avoidasterisk(it.allFeaturesArray[4]) + ","+
+                avoidasterisk(it.allFeaturesArray[5]) + ","+
+                avoidasterisk(it.allFeaturesArray[6])
 
             newtext += "＜" + surhi + "＞" + sur
         }
         var oldoldtext = newtext
 
-        // replaceできる限り、忍殺語辞書に基づき変換
+        // replaceできる限り、忍殺語辞書に基づき変換 正規表現に変更
         var replace = true
         do
         {
             replace = false
             nindb.forEach {
-                if (newtext.indexOf(it.name) >= 0)
+                val regex = Regex(it.name)
+                while (regex.containsMatchIn(newtext))
                 {
-                    newtext = newtext.replace(it.name, it.value)
+                    newtext = regex.replace(newtext, it.value)
                     replace = true
                 }
             }
@@ -97,7 +111,7 @@ fun main(args: Array<String>)
             newtext = oldoldtext + "\n▼▼変換な▼▼\n\n" + newtext
         }
 
-        // 品詞の＜＞を削除するかどうか
+        // 品詞の＜＞を削除する
         if(! g.hinsiCheckBox.isSelected)
         {
             do

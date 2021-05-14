@@ -1,6 +1,6 @@
 # NJSLYRConvert
 
-- Java Swing で書かれた忍殺語変換プログラム（の予定）
+- Kotlin/Java Swing で書かれた忍殺語変換プログラム（の予定）
 - 忍殺 NinjaSlayer とはなにか
   - Twitterの公式アカウント @njslyr
   - 公式facebook https://www.facebook.com/ninjaslayer.jp
@@ -26,3 +26,4 @@
   - いまのところ形態素解析くらいしかできていません 
   - 変換辞書がしょぼすぎ＆機能が乏しすぎるのでC#で作られ現在ではダウンロード不可
   となっているフーリンカザン作者に問い合わせをしています
+  - 正規表現による変換に変更したためデータベースも変更
